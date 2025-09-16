@@ -59,9 +59,12 @@ export function RegisterAttendeeForm({ eventId, isEventFull, onAttendeeRegistere
         setIsOpen(false);
         onAttendeeRegistered();
       } else {
-        toast.error(response.error || "Failed to register for event");
+        console.log("Error response:", response);
+        
+        toast.error("User with this email is already registered for the event");
       }
     } catch (error) {
+      console.log("Error registering attendee:", error);
       toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
