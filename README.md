@@ -205,9 +205,28 @@ curl --location "http://localhost:8000/api/v1/events/1/attendees?page=1&size=10"
 
 **Backend** (create `backend/.env`):
 ```env
+# Environment Configuration
+ENVIRONMENT=development
+DEBUG=True
+
+# Database Configuration
 DATABASE_URL=sqlite+aiosqlite:///./app.db
-ALLOWED_ORIGINS=["http://localhost:3000"]
+
+# API Configuration
+API_PREFIX=/api
+API_VERSION=v1
+
+
+# CORS Configuration
+ALLOWED_ORIGINS=["http://localhost:3000", "http://127.0.0.1:3000"]
+ALLOWED_METHODS=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+ALLOWED_HEADERS=["*"]
+
+
+# Logging
 LOG_LEVEL=INFO
+LOG_FORMAT=json
+
 ```
 
 **Frontend** (create `frontend/.env.local`):
