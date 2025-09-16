@@ -33,41 +33,21 @@ export function EventCard({ event, onEventUpdated, onEditEvent, onDeleteEvent }:
   const eventFull = isEventFull(event.current_attendees, event.max_capacity);
 
   const getCapacityBadgeVariant = () => {
-    if (eventFull) return "destructive";
-    if (capacityPercentage > 80) return "outline";
+    if (eventFull) return "outline";
+    if (capacityPercentage > 70) return "outline";
     return "secondary";
   };
 
   return (
     <Card className="w-full">
       <CardHeader>
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start gap-1">
           <div>
             <CardTitle className="text-xl mb-2">{event.name}</CardTitle>
             <CardDescription>{event.location}</CardDescription>
           </div>
-          <div className="flex items-center gap-2">
-            {onEditEvent && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onEditEvent(event)}
-                className="h-8 w-8"
-              >
-                <Pencil className="h-4 w-4" />
-              </Button>
-            )}
-            {onDeleteEvent && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onDeleteEvent(event.id)}
-                className="h-8 w-8 text-destructive hover:text-destructive"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            )}
-            <Badge variant={getCapacityBadgeVariant()}>
+          <div className="flex items-center">
+            <Badge className={`${eventFull ? "bg-red-500" : "bg-green-700"}`}>
               {eventFull ? "Full" : "Available"}
             </Badge>
           </div>
@@ -113,7 +93,7 @@ export function EventCard({ event, onEventUpdated, onEditEvent, onDeleteEvent }:
               className={`h-2 rounded-full transition-all duration-300 ${
                 eventFull 
                   ? "bg-red-500" 
-                  : capacityPercentage > 80 
+                  : capacityPercentage > 70 
                   ? "bg-yellow-500" 
                   : "bg-green-500"
               }`}
@@ -122,7 +102,7 @@ export function EventCard({ event, onEventUpdated, onEditEvent, onDeleteEvent }:
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex gap-2 flex-wrap">
+      <CardFooter className="flex justify-between flex-wrap">
         <RegisterAttendeeForm
           eventId={event.id}
           isEventFull={eventFull}

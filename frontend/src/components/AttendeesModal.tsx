@@ -43,7 +43,7 @@ export function AttendeesModal({
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [totalAttendees, setTotalAttendees] = useState(0);
-  const pageSize = 4;
+  const pageSize = 10;
 
   const fetchAttendees = useCallback(async (page: number = 1, reset: boolean = true) => {
     if (page === 1) {
